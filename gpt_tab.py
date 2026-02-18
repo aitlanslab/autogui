@@ -64,7 +64,7 @@ def is_gpt_completed():
     region = (951, 84, 200, 40)
     sc1=pilot.screenshot(region=region)
     sc1.save("sc1.png")
-    max_waiting=12000
+    max_waiting=10000
     # wait for 60s to detect any changes
     for i in range(max_waiting):
         sc2=pilot.screenshot(region=region)
