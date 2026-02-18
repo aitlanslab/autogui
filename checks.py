@@ -47,7 +47,6 @@ def gpt_attachment_in_position():
 def annotation_loaded():
     region=28,176,100,50
     sc1=pilot.screenshot(region=region)
-    sc1.save("sc1.jpg")
     for i in range(300):
         sc2=pilot.screenshot(region=region)
         diff=screenshots_different(sc1,sc2)
