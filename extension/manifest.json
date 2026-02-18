@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "ChatGPT Paragraph Watcher",
+  "version": "1.0",
+  "description": "Checks first <p> element every 5 seconds on chatgpt.com and alerts its text.",
+  "permissions": [],
+  "host_permissions": [
+    "https://chatgpt.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
