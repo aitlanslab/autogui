@@ -20,7 +20,8 @@ from relogging import login_chatgpt, logout_chatgpt
 audio = AudioManager()
 
 
-
+failed_attempts=0
+max_failed_attempts=5
 audio.start_bgm("aud/wait.mp3")
 annotaion_in_correct_position=annotation_tab_in_position()
 print("Annotation Loaded")
@@ -80,11 +81,26 @@ for i in range(500):
         # Exit the loop
     result = submit_prompt()  
     if result==False:
-        audio.play_once(f"aud/error_short.mp3")
-        time.sleep(5)
-        tabs_reload()
-        close_download_popup()
-        continue
+        if failed_attempts>=max_failed_attempts:
+            print("Max failed attempts reached. Switching account.")
+            logout_chatgpt()
+            login_chatgpt(curr_acc)
+            curr_acc=curr_acc+1
+            if curr_acc>3:
+                curr_acc=1
+            # Redo 
+            close_download_popup()
+            switch_to_annotation_tab()
+            download_image()
+            drag_download()
+            gpt_stat=gpt_attachment_in_position()
+        else:
+            audio.play_once(f"aud/error_short.mp3")
+            time.sleep(5)
+            tabs_reload()
+            close_download_popup()
+            failed_attempts=failed_attempts+1
+            continue
 
     close_download_popup()
     res=submit_data()
