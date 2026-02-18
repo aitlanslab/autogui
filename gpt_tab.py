@@ -69,7 +69,6 @@ def is_gpt_completed():
     for i in range(max_waiting):
         sc2=pilot.screenshot(region=region)
         change=screenshot_change_percent(sc1, sc2)
-        print(change)
         if change>=100:
             print("GPT response detected")
             refresh_gpt()
@@ -88,6 +87,7 @@ def is_gpt_completed():
             refresh_gpt()
             return data
         if i%100==0:
+            print(f"Waiting for GPT response... {max_waiting-i} ms left")
             pilot.scroll(-200)
         time.sleep(0.01)
     print("Waiting time up")
