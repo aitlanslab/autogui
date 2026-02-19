@@ -79,11 +79,9 @@ def load_annotation():
         res=img_different(plus_btn,saved_btn)
         if float(res)>=10:
             create_log({"function":"load_annotation","success":True,"diff":res})
-            plus_btn.save("res.jpg")
             return True
 
         create_log({"function":"load_annotation","success":False,"diff":res})
-        plus_btn.save("res.jpg")
         time.sleep(1)
     return False
 
