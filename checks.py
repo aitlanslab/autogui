@@ -142,4 +142,13 @@ def annotation_image_loaded():
         print("Image is not loaded")
         return False
     
+    # check if different loading screen
+    region=120,231,160,100
+    sc=pilot.screenshot(region=region)
+    saved=Image.open("trainings/still_img_loading.jpg")
+    diff=screenshots_color_different(saved,sc)
+    if diff<=8:
+        print("Image not loaded yet")
+        return False
+
     return True

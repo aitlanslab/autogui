@@ -11,9 +11,13 @@ print(f"Screen Size : {size.height}x{size.width}")
 
 
 """
-region=34,214,337,120
+region=120,231,160,100
 sc=pilot.screenshot(region=region)
-sc.save("trainings/pending_img_loading.jpg")
+sc.save("trainings/still_img_loading.jpg")
+
+region=120,231,160,100
+sc=pilot.screenshot(region=region)
+sc.save("trainings/still_img_loading.jpg")
 """
 while True:
     position=pilot.position()
