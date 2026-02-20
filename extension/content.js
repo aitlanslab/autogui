@@ -22,13 +22,10 @@ function checkParagraph() {
     return;
   }
 
-  const codes = document.querySelectorAll("code");
+  //const codes = document.querySelectorAll("code");
+  const codes=document.getElementById("code-block-viewer")
   if (codes.length === 0) return;
-
-  const lastCode = codes[codes.length - 1];
-  const text = lastCode.innerText.trim();
-
-  console.log("Checking:", text);
+  const text = codes.innerText.trim();
 
   if (text !== "" && isValidJSON(text)) {
     triggered = true;
