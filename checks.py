@@ -1,6 +1,6 @@
 from sc import pilot
 from utils.screens import screenshots_color_different,screenshots_different, screenshot_change_percent
-from cursor_positions import image_starting, reload_btn, annotation_menu_btn, menu_btn
+from cursor_positions import image_starting, reload_btn, annotation_reload, annotation_menu_btn, menu_btn
 import time
 from gpt_tab import tabs_reload
 from utils.log import create_log
@@ -176,8 +176,7 @@ def annotation_image_loaded():
     diff=screenshot_change_percent(saved2,sc2)
     print("Annotation page not opened")
     print(diff)
-    """
-    if diff>=8:        
+    if diff<=93.70:        
         print("Annotation page not opened")
         print(diff)
         time.sleep(0.8)
@@ -186,9 +185,43 @@ def annotation_image_loaded():
         time.sleep(0.5)
         pilot.moveTo(annotation_menu_btn,duration=0.5)
         pilot.click()
-        time.sleep(100)
         return False
-    """
-    
+    return True
 
+def login_if_loggedout():
+    region=11,7,100,20
+    sc=pilot.screenshot(region=region)
+    saved=Image.open("trainings/login_tab.jpg")
+    diff=screenshots_color_different(saved,sc)
+    if diff<37:
+        pilot.moveTo(annotation_reload, duration=0.3)
+        pilot.click()
+        time.sleep(3)
+        import random
+        from accounts import accounts
+        acc=random.choice(accounts)
+        email=acc["email"]
+        password=acc["password"]
+        pilot.moveTo(277,402)
+        pilot.click()
+        time.sleep(0.5)
+        pilot.typewrite(email, interval=0.05)
+
+        pilot.moveTo(276,462)
+        pilot.click()
+        time.sleep(0.5)
+        pilot.typewrite(password, interval=0.05)
+
+        pilot.moveTo(395,557)
+        pilot.click()
+        time.sleep(3)
+
+        region=5,136,160,60
+        annotation_url="http://68.178.172.222/bsi/admin/annotations.php"
+        pilot.moveTo(280,62,duration=0.5)
+        pilot.click()
+        time.sleep(0.5)
+        pilot.typewrite(annotation_url, interval=0.05)
+        pilot.press("enter")
+        time.sleep(4)
     return True

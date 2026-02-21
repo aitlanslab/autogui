@@ -8,7 +8,7 @@ from annotation_tab import (
     dismiss_filler,
     submit_form
 )
-from checks import load_annotation, load_chatgpt, annotation_image_loaded, chatgpt_tab_in_position, annotation_tab_in_position, gpt_attachment_in_position 
+from checks import load_annotation,login_if_loggedout, load_chatgpt, annotation_image_loaded, chatgpt_tab_in_position, annotation_tab_in_position, gpt_attachment_in_position 
 from sounds import AudioManager
 from gpt_tab import submit_prompt, is_gpt_completed, tabs_reload
 import asyncio
@@ -23,11 +23,20 @@ audio = AudioManager()
 failed_attempts=0
 max_failed_attempts=5
 audio.start_bgm("aud/wait.mp3")
+switch_to_annotation_tab()
+
+# Login if logged out
+auth=login_if_loggedout()
+if auth==False:
+    time.sleep(100)
+
 annotaion_in_correct_position=annotation_tab_in_position()
 print("Annotation Loaded")
 chatgpt_tab_in_position_in_correct_position=chatgpt_tab_in_position()
 print("ChatGPT Loaded")
 audio.stop_bgm()
+
+
 
 checks=False
 if annotaion_in_correct_position and chatgpt_tab_in_position:
