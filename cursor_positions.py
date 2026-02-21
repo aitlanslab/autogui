@@ -8,6 +8,8 @@ annotation_first_field=620,350
 image_starting=28,176
 reload_btn=79,54
 annotation_reload=75,54
+menu_btn=17,111
+annotation_menu_btn=96,205
 
 # Brave Browser
 popup_save_button=529,440

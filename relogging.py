@@ -13,37 +13,45 @@ from cursor_positions import (
     chatgpt_temp_chat
 )
 from PIL import Image
-from utils.screens import screenshots_different
+from utils.screens import screenshots_different, screenshots_color_different, screenshot_change_percent
 import time
 
 def logout_chatgpt():
     time.sleep(1)
-    
-    pilot.moveTo(chatgpt_menubar, duration=0.5)
-    pilot.click()
-    time.sleep(0.5)
-    chatgpt_account_pos, chatgpt_logout_pos = get_logout_position()
-    print(f"Account Position: {chatgpt_account_pos}, Logout Position: {chatgpt_logout_pos}")
-    pilot.moveTo(chatgpt_account_pos, duration=0.5)
-    pilot.click()
-    time.sleep(0.5)
-    pilot.moveTo(chatgpt_logout_pos, duration=0.5)
-    pilot.click()
-    time.sleep(0.5)
-    pilot.moveTo(chatgpt_logout_confirm, duration=0.5)
-    pilot.click()
-    time.sleep(0.5)
-    duration=30
-    for i in range(duration):
-        logout_btn=Image.open("trainings/chatgpt_loging_button.jpg")
-        area=1087,86,70,40
-        sc=pilot.screenshot(region=area)
-        img_diff=screenshots_different(logout_btn,sc)
-        if img_diff<=85:
-            print("Logged out successfully")
-            return True
-        time.sleep(1)
-    return False
+    region=1087,86,70,40
+    sc=pilot.screenshot(region=region)
+    saved=Image.open("trainings/chatgpt_loging_button.jpg")
+    img_diff=screenshot_change_percent(saved,sc)
+    if img_diff>85:
+        print(f"Logout Button Diff: {img_diff}")
+        time.sleep(5)
+
+        pilot.moveTo(chatgpt_menubar, duration=0.5)
+        pilot.click()
+        time.sleep(0.5)
+        chatgpt_account_pos, chatgpt_logout_pos = get_logout_position()
+        print(f"Account Position: {chatgpt_account_pos}, Logout Position: {chatgpt_logout_pos}")
+        pilot.moveTo(chatgpt_account_pos, duration=0.5)
+        pilot.click()
+        time.sleep(0.5)
+        pilot.moveTo(chatgpt_logout_pos, duration=0.5)
+        pilot.click()
+        time.sleep(0.5)
+        pilot.moveTo(chatgpt_logout_confirm, duration=0.5)
+        pilot.click()
+        time.sleep(0.5)
+        duration=30
+        for i in range(duration):
+            logout_btn=Image.open("trainings/chatgpt_loging_button.jpg")
+            area=1087,86,70,40
+            sc=pilot.screenshot(region=area)
+            img_diff=screenshots_different(logout_btn,sc)
+            if img_diff<=85:
+                print("Logged out successfully")
+                return True
+            time.sleep(1)
+        return False
+    return True
 
 
 def login_chatgpt(target_account=1):

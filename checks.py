@@ -1,7 +1,8 @@
 from sc import pilot
 from utils.screens import screenshots_color_different,screenshots_different, screenshot_change_percent
-from cursor_positions import image_starting, reload_btn
+from cursor_positions import image_starting, reload_btn, annotation_menu_btn, menu_btn
 import time
+from gpt_tab import tabs_reload
 from utils.log import create_log
 from PIL import Image
 from PIL import ImageChops
@@ -77,6 +78,9 @@ def load_annotation():
         plus_btn=pilot.screenshot(region=region)
         
         res=img_different(plus_btn,saved_btn)
+        print("Blank image diff")
+        print(res)
+        
         if float(res)>=10:
             create_log({"function":"load_annotation","success":True,"diff":res})
             return True
@@ -84,6 +88,22 @@ def load_annotation():
         create_log({"function":"load_annotation","success":False,"diff":res})
         time.sleep(1)
     return False
+
+error_count=0
+def load_chatgpt():
+    #region=45,493,25,25
+    region=1060,283,60,90
+    saved=Image.open("trainings/chatgpt_error.jpg")
+    for i in range(3):
+        sc=pilot.screenshot(region=region)
+        diff=screenshots_color_different(saved,sc)
+        if diff>=30:
+            return True
+        tabs_reload()
+        time.sleep(2)
+    return False
+
+
 
 
 def annotation_tab_in_position():
@@ -148,5 +168,27 @@ def annotation_image_loaded():
     if diff<=8:
         print("Image not loaded yet")
         return False
+
+    # check if annotation page is loaded
+    region=5,136,160,60
+    sc2=pilot.screenshot(region=region)
+    saved2=Image.open("trainings/review_page.jpg")
+    diff=screenshot_change_percent(saved2,sc2)
+    print("Annotation page not opened")
+    print(diff)
+    """
+    if diff>=8:        
+        print("Annotation page not opened")
+        print(diff)
+        time.sleep(0.8)
+        pilot.moveTo(menu_btn,duration=0.5)
+        pilot.click()
+        time.sleep(0.5)
+        pilot.moveTo(annotation_menu_btn,duration=0.5)
+        pilot.click()
+        time.sleep(100)
+        return False
+    """
+    
 
     return True

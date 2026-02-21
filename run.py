@@ -8,7 +8,7 @@ from annotation_tab import (
     dismiss_filler,
     submit_form
 )
-from checks import load_annotation, annotation_image_loaded, chatgpt_tab_in_position, annotation_tab_in_position, gpt_attachment_in_position 
+from checks import load_annotation, load_chatgpt, annotation_image_loaded, chatgpt_tab_in_position, annotation_tab_in_position, gpt_attachment_in_position 
 from sounds import AudioManager
 from gpt_tab import submit_prompt, is_gpt_completed, tabs_reload
 import asyncio
@@ -38,9 +38,9 @@ curr_acc=1
 for i in range(500):
   audio.start_bgm("aud/wait.mp3")
   annotation_loaded=load_annotation()
-  
   if checks and annotation_loaded:
     audio.stop_bgm()
+    
     audio.play_once("aud/wonder.mp3")
     time.sleep(0.8)
     options = ["1", "2", "3", "4", "5"]
@@ -57,6 +57,13 @@ for i in range(500):
       tabs_reload()
       time.sleep(3)
       continue
+
+    chatgpt_loaded=load_chatgpt()
+    if chatgpt_loaded==False:
+      audio.play_once("aud/error.mp3")
+      time.sleep(30)
+      continue
+
     download_image()
     drag_download()
     gpt_stat=gpt_attachment_in_position()

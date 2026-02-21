@@ -19,6 +19,16 @@ region=120,231,160,100
 sc=pilot.screenshot(region=region)
 sc.save("trainings/still_img_loading.jpg")
 """
+"""
+region=5,136,160,60
+sc=pilot.screenshot(region=region)
+sc.save("trainings/annotation_page.jpg")
+"""
+"""
+region=1060,283,60,90
+sc=pilot.screenshot(region=region)
+sc.save("trainings/chatgpt_error.jpg")
+"""
 while True:
     position=pilot.position()
     print(f"Position : {position}")

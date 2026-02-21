@@ -16,11 +16,12 @@ def download_image():
     pilot.rightClick()
     time.sleep(0.5)
     pilot.moveTo(annotation_image_download_option,duration=0.2)
+    time.sleep(0.3)
     pilot.click()
     time.sleep(0.5)
     pilot.moveTo(popup_save_button, duration=0.2)
     pilot.click()
-    time.sleep(0.5)
+    time.sleep(1)
     return True
 
 def take_ss():
