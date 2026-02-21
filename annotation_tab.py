@@ -26,12 +26,12 @@ def download_image():
     sc=pilot.screenshot(region=region)
     saved=Image.open("trainings/download_popup_save_btn.jpg")
     diff=screenshots_different(saved,sc)
-    while diff<=80:
+    while diff>=55:
         print(f"Download popup not yet visible: {diff}")
         time.sleep(0.2)
         sc=pilot.screenshot(region=region)
         diff=screenshots_different(saved,sc)
-
+    print(f"Download popup visible at: {diff}")
     pilot.moveTo(popup_save_button, duration=0.2)
     pilot.click()
     time.sleep(1)

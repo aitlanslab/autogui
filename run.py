@@ -25,7 +25,6 @@ max_failed_attempts=5
 audio.start_bgm("aud/wait.mp3")
 switch_to_annotation_tab()
 tabs_reload()
-time.sleep(10)
 # Login if logged out
 auth=login_if_loggedout()
 if auth==False:
