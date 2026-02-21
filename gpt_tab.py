@@ -63,7 +63,7 @@ def refresh_gpt():
 def is_gpt_completed():
     region = (951, 84, 200, 40)
     sc1=pilot.screenshot(region=region)
-    max_waiting=1500
+    max_waiting=1000
     # wait for 60s to detect any changes
     for i in range(max_waiting):
         sc2=pilot.screenshot(region=region)

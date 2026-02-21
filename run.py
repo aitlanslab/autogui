@@ -24,10 +24,12 @@ failed_attempts=0
 max_failed_attempts=5
 audio.start_bgm("aud/wait.mp3")
 switch_to_annotation_tab()
-
+tabs_reload()
+time.sleep(10)
 # Login if logged out
 auth=login_if_loggedout()
 if auth==False:
+    audio.play_once("aud/error_short.mp3")
     time.sleep(100)
 
 annotaion_in_correct_position=annotation_tab_in_position()
@@ -41,12 +43,20 @@ audio.stop_bgm()
 checks=False
 if annotaion_in_correct_position and chatgpt_tab_in_position:
   checks=True
+  print("All tabs in correct position")
 
 c=0
 curr_acc=1
 for i in range(500):
   audio.start_bgm("aud/wait.mp3")
   annotation_loaded=load_annotation()
+  if annotation_loaded==False:
+    audio.play_once("aud/error_short.mp3")
+    time.sleep(1)
+    tabs_reload()
+    continue
+  print("Annotation Loaded")
+  print(f"Checks : {checks} Annotation Loaded : {annotation_loaded}")
   if checks and annotation_loaded:
     audio.stop_bgm()
     

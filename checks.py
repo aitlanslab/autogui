@@ -114,7 +114,9 @@ def annotation_tab_in_position():
     for i in range(50):
         sc=pilot.screenshot(region=region)
         diff=screenshots_different(saved,sc)
-        if diff<100:
+        print("Getting postion difference of ")
+        print(diff)
+        if diff<=100:
             create_log({"function":"annotation_tab_in_position","success":True,"diff":diff})
             return True
         create_log({"function":"annotation_tab_in_position","success":False,"diff":diff})
