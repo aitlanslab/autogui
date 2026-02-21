@@ -29,6 +29,9 @@ region=1060,283,60,90
 sc=pilot.screenshot(region=region)
 sc.save("trainings/chatgpt_error.jpg")
 """
+import time
+time.sleep(3)
+
 
 while True:
     position=pilot.position()

@@ -1,5 +1,7 @@
 from sc import pilot
 import time
+from PIL import Image
+from utils.screens import screenshots_different, screenshots_color_different
 import pyperclip
 import json
 
@@ -19,6 +21,17 @@ def download_image():
     time.sleep(0.3)
     pilot.click()
     time.sleep(0.5)
+    # Check if download popup opened
+    region=467,427,100,25
+    sc=pilot.screenshot(region=region)
+    saved=Image.open("trainings/download_popup_save_btn.jpg")
+    diff=screenshots_different(saved,sc)
+    while diff<=80:
+        print(f"Download popup not yet visible: {diff}")
+        time.sleep(0.2)
+        sc=pilot.screenshot(region=region)
+        diff=screenshots_different(saved,sc)
+
     pilot.moveTo(popup_save_button, duration=0.2)
     pilot.click()
     time.sleep(1)
