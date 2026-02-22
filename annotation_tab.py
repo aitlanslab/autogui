@@ -32,8 +32,8 @@ def download_image():
         sc=pilot.screenshot(region=region)
         diff=screenshots_different(saved,sc)
     print(f"Download popup visible at: {diff}")
-    pilot.moveTo(popup_save_button, duration=0.2)
-    pilot.click()
+    # press enter
+    pilot.press("enter")
     time.sleep(1)
     return True
 

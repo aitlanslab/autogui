@@ -139,8 +139,9 @@ for i in range(500):
       continue
       # Exit the loop
       #break
-    pilot.moveTo(dismiss_filler,duration=0.5)
-    pilot.click()
+    #pilot.moveTo(dismiss_filler,duration=0.5)
+    #pilot.click()
+    pilot.press("enter")
     submit_form()
     audio.stop_bgm()
     #audio.play_once(f"aud/success/{rando}.mp3")
