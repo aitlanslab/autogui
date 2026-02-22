@@ -23,6 +23,7 @@ audio = AudioManager()
 failed_attempts=0
 max_failed_attempts=5
 audio.start_bgm("aud/wait.mp3")
+time.sleep(5)
 switch_to_annotation_tab()
 tabs_reload()
 # Login if logged out
