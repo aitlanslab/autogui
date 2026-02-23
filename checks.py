@@ -100,6 +100,11 @@ def load_chatgpt():
         if diff>=30:
             return True
         tabs_reload()
+        pilot.moveTo(1004,62,duration=0.8)
+        pilot.click()
+        pilot.typewrite("https://chatgpt.com/?temporary-chat=true", interval=0.05)
+        time.sleep(1)
+        pilot.press("enter")
         time.sleep(2)
     return False
 
