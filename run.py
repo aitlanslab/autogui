@@ -55,6 +55,12 @@ for i in range(500):
     time.sleep(1)
     tabs_reload()
     continue
+
+  if chatgpt_tab_in_position()==False:
+    audio.play_once("aud/error.mp3")
+    time.sleep(60)
+    break
+
   print("Annotation Loaded")
   print(f"Checks : {checks} Annotation Loaded : {annotation_loaded}")
   if checks and annotation_loaded:
