@@ -146,7 +146,7 @@ def chatgpt_tab_in_position():
         time.sleep(1)
     print(f"Failed to find gpt tab, difference of diff {diff}")
     sc.save("failed_gpt.jpg")
-    return True
+    return False
 
 def annotation_image_loaded():
     region=87,227,244,120
